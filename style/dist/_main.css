@@ -11,7 +11,7 @@ body {
 .board {
   width: 40vw;
   height: 40vw;
-  background-color: #46ffe6;
+  background-color: #aafff3;
   border-radius: 25px;
   background: linear-gradient(145deg, #f0f0f0, #cacaca);
   box-shadow: 25px 25px 50px #bebebe, -25px -25px 50px #ffffff;
@@ -19,7 +19,7 @@ body {
 }
 
 .unit {
-  background-color: #b3eef0;
+  background-color: #aafff3;
   border-radius: 2px;
   border: 0.1px outset #84abff;
 }

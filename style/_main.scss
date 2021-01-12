@@ -1,7 +1,8 @@
 //Variables
 $theme1: #e0e0e0;
-$theme2: rgb(70, 255, 230);
+$theme2: #aafff3;
 $fontsize: 18px;
+$wall: #016efd;
 
 //Neomorphism
 $lg1 : #f0f0f0;
@@ -31,7 +32,7 @@ body{
 
 //bOARD===============================================
 .unit{
-    background-color: rgb(179, 238, 240);
+    background-color: $theme2;
     border-radius: 2px;
     border: 0.1px outset #84abff;
     &:hover{

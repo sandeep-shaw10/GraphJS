@@ -1,11 +1,11 @@
 $(document).ready(function () {
-
   //Set pevious State
   var SIZE = 22;
   var SPEED = 3;
   var ALGORITHM = 1;
   var startid, endid;
-
+  var isDown = false;
+  var wall = [];
 
   //Initial Function
   displayGrid(SIZE);
@@ -13,13 +13,15 @@ $(document).ready(function () {
   //sIZE SPEED AND SIZE
   $("[type=range]").change(function () {
     var newval = $(this).val();
-    //console.log(newval);
+    console.log(newval);
     if (this.id == "speed") {
       $("#speed_dis").text(newval);
       SPEED = newval;
     } else {
       $("#size_dis").text(newval);
       SIZE = newval;
+      startid = undefined;
+      endid = undefined;
       displayGrid(SIZE);
     }
   });
@@ -40,6 +42,8 @@ $(document).ready(function () {
   //Resize Event Handler
   $(window).on("resize", function () {
     displayGrid(SIZE);
+    startid = undefined;
+    endid = undefined;
   });
 
   //cHOOSE aLGORITHM
@@ -59,7 +63,13 @@ $(document).ready(function () {
 
   //oNCLICK HAndle Visualization
   $("#start").on("click", function () {
-    decoder(ALGORITHM);
+    if(startid==undefined || endid==undefined){
+      alert("Select the starting and ending point.");
+    }else{
+      decoder(ALGORITHM);
+      wallGenerate();
+    }
+
   });
 
   //Handle algorithm visualization
@@ -76,23 +86,78 @@ $(document).ready(function () {
   }
 
   //Display---Animation---Onclick
-  $(".unit").on('dblclick',function(){
-      //console.log(startid);
-      //console.log(endid);
-      if(startid==undefined){
-        $(this).css("background","#262626");
-        startid = $(this).attr("id");
-      }else if(endid==undefined){
-        $(this).css("background","#262626");
-        endid = $(this).attr("id");
-      }else{
-        //pass;
+  $("body").on("dblclick", ".unit", function () {
+    console.log(startid);
+    console.log(endid);
+    if (startid == undefined) {
+      $(this).css("background", "#262626");
+      startid = $(this).attr("id");
+    } else if (endid == undefined) {
+      $(this).css("background", "#262626");
+      endid = $(this).attr("id");
+    } else {
+      //pass;
+    }
+  });
+
+  //Clear Cell
+  $("#clear").on("click",function(){
+    startid = undefined;
+    endid = undefined;
+    wall = [];
+    $(".unit").css("background","#aafff3");
+  });
+
+  //Double Click Custom WALL Mouse Event
+  $("body").on("mousedown", ".unit", function () {
+    isDown = true;
+  });
+
+  $("body").on("mouseup", ".unit", function () {
+    isDown = false;
+  });
+
+  $("body").on("mouseover", ".unit", function () {
+    if (isDown && $(this).css("background-color") != "rgb(38, 38, 38)") {
+      if ($(this).css("background-color") === "rgb(1, 110, 253)") {
+        $(this).css("background-color", " #aafff3");
+      } else {
+        $(this).css("background-color", "#016efd");
       }
+      //console.log($(this).css("background-color"));
+    }
   });
 
   //Making Wall
+  $("#wall").on("click",function(){
+      wall = 0
+      for (let i = 0; i < SIZE*SIZE; i++) {
+          if(i==startid || i==endid){
+              //pass
+          }else{
+            let x = Math.round(Math.random()*10);
+              if(x==0 || x==1 || x==2){
+                $("#"+i).css('background','#016efd');
+              }
+          }
+      }
+      console.log(wall)
+  });
 
   //generating wall array
+  function wallGenerate(){
+      wall = [];
+      for (let i = 0; i < SIZE*SIZE; i++) {
+        let x = $("#"+i).css("background-color");
+        if(x=="rgb(1, 110, 253)"){
+          wall.push(i);
+        }
+      }
+      console.log(wall);
+  }
+
+  //Start Button
+
 
   //Applying Algorithm one-by-one
 
