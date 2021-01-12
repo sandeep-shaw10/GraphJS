@@ -1,0 +1,67 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #e0e0e0 !important;
+}
+
+.board {
+  width: 40vw;
+  height: 40vw;
+  background-color: #46ffe6;
+  border-radius: 25px;
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  box-shadow: 25px 25px 50px #bebebe, -25px -25px 50px #ffffff;
+  overflow: hidden;
+}
+
+.control {
+  width: 40vw;
+  height: 40vw;
+  border-radius: 25px;
+  background: #e0e0e0;
+  box-shadow: inset 25px 25px 50px #bebebe, inset -25px -25px 50px #ffffff;
+}
+
+.footer {
+  color: #ffffff;
+}
+
+.screen {
+  width: 38vw;
+  height: 38vw;
+  border-radius: 10px;
+}
+
+.title {
+  border-radius: 20px;
+  background: linear-gradient(145deg, #cacaca, #f0f0f0);
+  box-shadow: 11px 11px 27px #c5c5c5, -11px -11px 27px #fbfbfb;
+}
+
+.card:hover {
+  box-shadow: 5px 5px 20px #0c0c0c;
+  transition: 300ms;
+}
+
+@media screen and (max-width: 992px) {
+  .board, .control {
+    width: 75vw;
+    height: 75vw;
+  }
+
+  .screen {
+    width: 70vw;
+    height: 70vw;
+  }
+}
+@media screen and (max-width: 520px) {
+  .control {
+    border-radius: 0px;
+    background: none;
+    box-shadow: none;
+  }
+}

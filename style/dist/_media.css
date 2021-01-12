@@ -1,0 +1,18 @@
+@media screen and (max-width: 992px) {
+  .board, .control {
+    width: 75vw;
+    height: 75vw;
+  }
+
+  .screen {
+    width: 70vw;
+    height: 70vw;
+  }
+}
+@media screen and (max-width: 520px) {
+  .control {
+    border-radius: 0px;
+    background: none;
+    box-shadow: none;
+  }
+}

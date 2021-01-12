@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Icon Favicon-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--Boostrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <!--Jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!--Document Title-->
+    <title>Visualize Path</title>
+
+    <!--Custom Style-->
+    <link rel="stylesheet" href="style/dist/_main.css">
+</head>
+
+<body>
+    <!--Navbar-->
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <h1 class="text-light"><i class="fa fa-blind"></i> Path Finding Visualizer</h1>
+        </div>
+    </nav>
+
+    <!--Algorithm Name-->
+    <div class="name">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="title mt-4 text-center py-2 mx-4">
+                        <h1>Breadth First Search</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Display-->
+    <div class="display ">
+        <div class="container pb-4">
+            <div class="row my-4">
+                <div class="col-lg-6">
+                    <div class="board my-4 mx-auto d-flex">
+                        <div class="screen bg-light m-auto ">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="control my-4 mx-auto p-4">
+                        <h1 class="text-center my-2"> <i class="fa fa-cog fa-spin"></i> Controls</h1>
+                        <!--Choose Algorithm-->
+                        <div class="col-auto my-2">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-9 my-auto">
+                                        <select class="form-select" aria-label="Default select example" id="algorithm">
+                                            <option selected value="1">BFS</option>
+                                            <option value="2">DFS</option>
+                                            <option value="3">Dijkstra</option>
+                                            <option value="4">A*</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-dark m-2" id="algo-select">Select</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-auto my-4">
+                            <label for="speed" class="form-label">Speed : <span id="speed_dis"> 3 </span></label>
+                            <input type="range" class="form-range dark" min="1" max="5" step="0.5" id="speed">
+                        </div>
+
+                        <div class="col-auto my-4">
+                            <label for="size" class="form-label">Dimension : <span id="size_dis"> 22 </span></label>
+                            <input type="range" class="form-range dark" min="4" max="40" step="1" id="size">
+                        </div>
+
+
+                        <div class="container">
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <button class="btn btn-dark" id="start">Visualize</button>
+                                </div>
+                                <div class="col-4">
+                                    <button class="btn btn-outline-dark" id="clear">Clear</button>
+                                </div>
+                                <div class="col-4">
+                                    <button class="btn btn-dark" id="wall">Rule</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!--Slider Card-->
+    <div class="card-grp py-4">
+        <div class="container">
+            <h1 class="text-center">SEARCHING ALGORITHM</h1>
+            <div class="row">
+                <div class="col-xl-3 col-md-6 col-sm-12">
+                    <div class="card my-4 mx-auto" style="width: 18rem;">
+                        <img class="card-img-top" src="https://picsum.photos/200/120" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Breadth First Search</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 col-sm-12">
+                    <div class="card my-4 mx-auto" style="width: 18rem;">
+                        <img class="card-img-top" src="https://picsum.photos/200/120" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Depth First Search</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 col-sm-12">
+                    <div class="card my-4 mx-auto" style="width: 18rem;">
+                        <img class="card-img-top" src="https://picsum.photos/200/120" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Dijkstra Algorithm</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 col-sm-12">
+                    <div class="card my-4 mx-auto" style="width: 18rem;">
+                        <img class="card-img-top" src="https://picsum.photos/200/120" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">A* Algorithm</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <!--Icon-->
+    <div class="icon py-4 my-4">
+        <div class="container text-center">
+            <h1 class="text-center">FEATURES</h1>
+            <div class="row">
+                <div class="col-lg-4 col-md-12">
+                    <div class="icon-show my-4">
+                        <img class="img-fluid " src="https://www.svgrepo.com/show/27891/location.svg" alt="icon"
+                            width="250px">
+                        <h4 class="my-2">Map Marker</h4>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-12">
+                    <div class="icon-show my-4">
+                        <img class="img-fluid" src="https://www.svgrepo.com/show/1089/graph.svg" alt="icon"
+                            width="250px">
+                        <h4 class="my-2">Map Marker</h4>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="icon-show my-4">
+                        <img class="img-fluid" src="https://www.svgrepo.com/show/227055/maze.svg" alt="icon"
+                            width="250px">
+                        <h4 class="my-2">Map Marker</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Footer-->
+    <div class="footer bg-dark py-4 px-2">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12 ">
+                    <h3>Path Visualizer 2021</h3>
+                </div>
+                <div class="col-12 mt-2">
+                    <i class="mx-2 fa fa-2x fa-instagram "></i>
+                    <i class="mx-2 fa fa-2x fa-youtube-play"></i>
+                    <i class="mx-2 fa fa-2x fa-linkedin-square"></i>
+                    <i class="mx-2 fa fa-2x fa-github"></i>
+                </div>
+                <div class="col-12 mt-2">
+                    <small>&copy; Sandeep Shaw </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!--Popper Jquery Dependency-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+        integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+        crossorigin="anonymous"></script>
+    <script src="script/script.js"></script>
+
+</body>
+
+</html>
