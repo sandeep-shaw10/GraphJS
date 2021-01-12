@@ -156,7 +156,11 @@ $(document).ready(function () {
       console.log(wall);
   }
 
-  //Start Button
+  //Generate Array of Given Size
+
+  //Make bfs dfs work ===> visual animate and path animate
+  //Scope for the dijistra and algorithm
+  //Scope of the the other algorithm to work
 
 
   //Applying Algorithm one-by-one
