@@ -28,11 +28,43 @@ body {
   transition: 200ms;
 }
 
+.restore {
+  background: #aafff3;
+}
+
+.target {
+  background: #262626;
+}
+
+.wall {
+  background: #016efd;
+}
+
 .screen {
   display: flex;
   flex-wrap: wrap;
 }
 
+.animate {
+  animation: appear 1s;
+  background-color: #fff066;
+  opacity: 1;
+}
+
+@keyframes appear {
+  0% {
+    background-color: #42ffe0;
+    opacity: 0;
+  }
+  75% {
+    background-color: #5900ff;
+    opacity: 0.5;
+  }
+  100% {
+    background-color: #ffff66;
+    opacity: 1;
+  }
+}
 .control {
   width: 40vw;
   height: 40vw;

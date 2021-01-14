@@ -1,5 +1,7 @@
 //Importing Algorithm
 import {x} from './dijkstra.js'
+import {BreadthFirstSearch} from './bfs.js'
+import {DepthFirstSearch} from './dfs.js'
 
 $(document).ready(function () {
   //Set pevious State
@@ -66,23 +68,23 @@ $(document).ready(function () {
     ALGORITHM = choice;
   });
 
-  //oNCLICK HAndle Visualization Start
+  //oNCLICK HAndle Visualization [[[[[[Start]]]]]]]
   $("#start").on("click", function () {
     if (startid == undefined || endid == undefined) {
       alert("Select the starting and ending point.");
     } else {
-      decoder(ALGORITHM);
       wallGenerate();
       connectArray(SIZE);
+      decoder(ALGORITHM);
     }
   });
 
   //Handle algorithm visualization
   function decoder(algo) {
     if (algo == 1) {
-      console.log("Call BFS");
+      BreadthFirstSearch(data,startid,endid);
     } else if (algo == 2) {
-      console.log("Call DFS");
+      DepthFirstSearch(data,startid,endid);
     } else if (algo == 3) {
       console.log("Call dJ");
       x();
@@ -93,13 +95,13 @@ $(document).ready(function () {
 
   //Display---Animation---Onclick
   $("body").on("dblclick", ".unit", function () {
-    console.log(startid);
-    console.log(endid);
+    //console.log(startid);
+    //console.log(endid);
     if (startid == undefined) {
-      $(this).css("background", "#262626");
+      $(this).addClass("target");
       startid = $(this).attr("id");
     } else if (endid == undefined) {
-      $(this).css("background", "#262626");
+      $(this).addClass("target");
       endid = $(this).attr("id");
     } else {
       //pass;
@@ -111,8 +113,11 @@ $(document).ready(function () {
     startid = undefined;
     endid = undefined;
     wall = [];
-    $(".unit").css("background", "#aafff3");
+    $(".unit").addClass("restore");
     data = new Array(2);
+    $(".unit").removeClass("animate");
+    $(".unit").removeClass("target");
+    $(".unit").removeClass("wall");
   });
 
   //Double Click Custom WALL Mouse Event
@@ -127,9 +132,11 @@ $(document).ready(function () {
   $("body").on("mouseover", ".unit", function () {
     if (isDown && $(this).css("background-color") != "rgb(38, 38, 38)") {
       if ($(this).css("background-color") === "rgb(1, 110, 253)") {
-        $(this).css("background-color", " #aafff3");
+        $(this).addClass("restore");
+        $(this).removeClass("wall");
       } else {
-        $(this).css("background-color", "#016efd");
+        $(this).addClass("wall");
+        $(this).removeClass("restore");
       }
       //console.log($(this).css("background-color"));
     }
@@ -144,7 +151,7 @@ $(document).ready(function () {
       } else {
         let x = Math.round(Math.random() * 10);
         if (x == 0 || x == 1 || x == 2) {
-          $("#" + i).css("background", "#016efd");
+          $("#" + i).addClass("wall");
         }
       }
     }
@@ -199,6 +206,8 @@ $(document).ready(function () {
       this.id = id;
       this.isWall = isWall;
       this.neighbors = [];
+      this.path = [];
+      this.visited = false;
 
       this.connectFrom = function(data){
           var i = this.i;
