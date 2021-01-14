@@ -131,7 +131,7 @@ $(document).ready(function () {
         var x = Math.round(Math.random() * 10);
 
         if (x == 0 || x == 1 || x == 2) {
-          $("#" + i).css('background', '#016efd');
+          $("#" + i).css("background", "#016efd");
         }
       }
     }
@@ -151,8 +151,60 @@ $(document).ready(function () {
     }
 
     console.log(wall);
-  } //Generate Array of Given Size
-  //Make bfs dfs work ===> visual animate and path animate
+  } //Generate Array of Given Size//Conerting Array to Graph
+
+
+  function connectArray(size) {
+    uniqueId = 0; //Making 2-D Array
+
+    for (var i = 0; i < size; i++) {
+      data[i] = new Array(2);
+    } //Initializing 2-D Array
+
+
+    for (var _i = 0; _i < size; _i++) {
+      for (var j = 0; j < size; j++) {
+        data[_i][j] = new Spot(_i, j, uniqueId++);
+      }
+    }
+
+    for (var _i2 = 0; _i2 < size; _i2++) {
+      for (var _j = 0; _j < size; _j++) {
+        data[_i2][_j].connectFrom(data);
+      }
+    }
+
+    console.log(data);
+  } //Function to make neighbors
+
+
+  function Spot(i, j, id) {
+    this.i = i;
+    this.j = j;
+    this.id = id;
+    this.neighbors = [];
+
+    this.connectFrom = function (data) {
+      var i = this.i;
+      var j = this.j;
+
+      if (i > 0) {
+        this.neighbors.push(data[i - 1][j]);
+      }
+
+      if (i < SIZE - 1) {
+        this.neighbors.push(data[i + 1][j]);
+      }
+
+      if (j > 0) {
+        this.neighbors.push(data[i][j - 1]);
+      }
+
+      if (j < SIZE - 1) {
+        this.neighbors.push(data[i][j + 1]);
+      }
+    };
+  } //Make bfs dfs work ===> visual animate and path animate
   //Scope for the dijistra and algorithm
   //Scope of the the other algorithm to work
   //Applying Algorithm one-by-one

@@ -1,5 +1,4 @@
-function x(){
+export function x(){
     console.log("Dijkstra")
 }
 
-export {x};

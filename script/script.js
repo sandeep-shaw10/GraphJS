@@ -1,3 +1,6 @@
+//Importing Algorithm
+import {x} from './dijkstra.js'
+
 $(document).ready(function () {
   //Set pevious State
   var SIZE = 22;
@@ -6,6 +9,8 @@ $(document).ready(function () {
   var startid, endid;
   var isDown = false;
   var wall = [];
+  var uniqueId;
+  var data = new Array(2);
 
   //Initial Function
   displayGrid(SIZE);
@@ -29,7 +34,7 @@ $(document).ready(function () {
   //Display grid Function
   function displayGrid(x) {
     $(".screen").html(" ");
-    screenWidth = $(".screen").innerWidth() / SIZE;
+    let screenWidth = $(".screen").innerWidth() / SIZE;
 
     for (let i = 0; i < x * x; i++) {
       $(".screen").append('<div class="unit" id="' + i + '"></div>');
@@ -61,15 +66,15 @@ $(document).ready(function () {
     ALGORITHM = choice;
   });
 
-  //oNCLICK HAndle Visualization
+  //oNCLICK HAndle Visualization Start
   $("#start").on("click", function () {
-    if(startid==undefined || endid==undefined){
+    if (startid == undefined || endid == undefined) {
       alert("Select the starting and ending point.");
-    }else{
+    } else {
       decoder(ALGORITHM);
       wallGenerate();
+      connectArray(SIZE);
     }
-
   });
 
   //Handle algorithm visualization
@@ -80,6 +85,7 @@ $(document).ready(function () {
       console.log("Call DFS");
     } else if (algo == 3) {
       console.log("Call dJ");
+      x();
     } else {
       console.log("Call aS");
     }
@@ -101,11 +107,12 @@ $(document).ready(function () {
   });
 
   //Clear Cell
-  $("#clear").on("click",function(){
+  $("#clear").on("click", function () {
     startid = undefined;
     endid = undefined;
     wall = [];
-    $(".unit").css("background","#aafff3");
+    $(".unit").css("background", "#aafff3");
+    data = new Array(2);
   });
 
   //Double Click Custom WALL Mouse Event
@@ -128,40 +135,94 @@ $(document).ready(function () {
     }
   });
 
-  //Making Wall
-  $("#wall").on("click",function(){
-      wall = 0
-      for (let i = 0; i < SIZE*SIZE; i++) {
-          if(i==startid || i==endid){
-              //pass
-          }else{
-            let x = Math.round(Math.random()*10);
-              if(x==0 || x==1 || x==2){
-                $("#"+i).css('background','#016efd');
-              }
-          }
-      }
-      console.log(wall)
-  });
-
-  //generating wall array
-  function wallGenerate(){
-      wall = [];
-      for (let i = 0; i < SIZE*SIZE; i++) {
-        let x = $("#"+i).css("background-color");
-        if(x=="rgb(1, 110, 253)"){
-          wall.push(i);
+  //Making Wall on button Press
+  $("#wall").on("click", function () {
+    wall = 0;
+    for (let i = 0; i < SIZE * SIZE; i++) {
+      if (i == startid || i == endid) {
+        //pass
+      } else {
+        let x = Math.round(Math.random() * 10);
+        if (x == 0 || x == 1 || x == 2) {
+          $("#" + i).css("background", "#016efd");
         }
       }
-      console.log(wall);
+    }
+    console.log(wall);
+  });
+
+  //generating wall array on click
+  function wallGenerate() {
+    wall = [];
+    for (let i = 0; i < SIZE * SIZE; i++) {
+      let x = $("#" + i).css("background-color");
+      if (x == "rgb(1, 110, 253)") {
+        wall.push(i);
+      }
+    }
+    console.log(wall);
   }
 
-  //Generate Array of Given Size
+  //Generate Array of Given Size//Conerting Array to Graph
+  function connectArray(size) {
+    uniqueId = 0;
+
+    //Making 2-D Array
+    for (let i = 0; i < size; i++) {
+      data[i] = new Array(2);
+    }
+
+    //Initializing 2-D Array
+    for (let i = 0; i < size; i++) {
+      for (let j = 0; j < size; j++) {
+        //console.log(wall.indexOf(uniqueId))
+        if(wall.indexOf(uniqueId)==-1){
+          data[i][j] = new Spot(i, j, false, uniqueId++);
+        }else{
+          data[i][j] = new Spot(i, j, true, uniqueId++);
+        }
+      }
+    }
+
+    for (let i = 0; i < size; i++) {
+      for (let j = 0; j < size; j++) {
+        data[i][j].connectFrom(data);
+      }
+    }
+    console.log(data);
+  }
+
+    //Function to make neighbors
+    function Spot(i,j,isWall,id){
+      this.i = i;
+      this.j = j;
+      this.id = id;
+      this.isWall = isWall;
+      this.neighbors = [];
+
+      this.connectFrom = function(data){
+          var i = this.i;
+          var j = this.j;
+          if(i>0 && !(data[i-1][j].isWall)){
+              this.neighbors.push(data[i-1][j])
+          }
+          if(i<SIZE-1 && !(data[i+1][j].isWall)){
+              this.neighbors.push(data[i+1][j])
+          }
+          if(j>0 && !(data[i][j-1].isWall)){
+              this.neighbors.push(data[i][j-1])
+          }
+          if(j<SIZE-1 && !(data[i][j+1].isWall)){
+              this.neighbors.push(data[i][j+1])
+          }
+      }
+
+  }
+
 
   //Make bfs dfs work ===> visual animate and path animate
   //Scope for the dijistra and algorithm
   //Scope of the the other algorithm to work
-
 
   //Applying Algorithm one-by-one
 
