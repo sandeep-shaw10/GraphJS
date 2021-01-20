@@ -87,8 +87,7 @@ $(document).ready(function () {
     } else if (algo == 2) {
       (0, _dfs.DepthFirstSearch)(data, startid, endid);
     } else if (algo == 3) {
-      console.log("Call dJ");
-      (0, _dijkstra.x)();
+      (0, _dijkstra.Dijkstra)(data, startid, endid);
     } else {
       console.log("Call aS");
     }
@@ -117,6 +116,7 @@ $(document).ready(function () {
     $(".unit").removeClass("animate");
     $(".unit").removeClass("target");
     $(".unit").removeClass("wall");
+    $(".unit").removeClass("path");
   }); //Double Click Custom WALL Mouse Event
 
   $("body").on("mousedown", ".unit", function () {
@@ -144,9 +144,9 @@ $(document).ready(function () {
     for (var i = 0; i < SIZE * SIZE; i++) {
       if (i == startid || i == endid) {//pass
       } else {
-        var _x = Math.round(Math.random() * 10);
+        var x = Math.round(Math.random() * 10);
 
-        if (_x == 0 || _x == 1 || _x == 2) {
+        if (x == 0 || x == 1 || x == 2) {
           $("#" + i).addClass("wall");
         }
       }
@@ -159,9 +159,9 @@ $(document).ready(function () {
     wall = [];
 
     for (var i = 0; i < SIZE * SIZE; i++) {
-      var _x2 = $("#" + i).css("background-color");
+      var x = $("#" + i).css("background-color");
 
-      if (_x2 == "rgb(1, 110, 253)") {
+      if (x == "rgb(1, 110, 253)") {
         wall.push(i);
       }
     }
@@ -207,6 +207,7 @@ $(document).ready(function () {
     this.neighbors = [];
     this.path = [];
     this.visited = false;
+    this.distance = 0;
 
     this.connectFrom = function (data) {
       var i = this.i;

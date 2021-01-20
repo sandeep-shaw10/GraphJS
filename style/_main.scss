@@ -1,6 +1,6 @@
 //Variables
 $theme1: #e0e0e0;
-$theme2: #aafff3;
+$theme2: #ffffff;
 $fontsize: 18px;
 $wall: #016efd;
 
@@ -60,13 +60,17 @@ body{
 
 .animate{
     animation: appear 1s;
-    background-color: #efff5f;
+    background-color: #f4fd9e;
 }
 
 @keyframes appear{
     0%{opacity: 0.5;transform: scale(0); border-radius: 50%;}
     30%{opacity: 0.75;background-color: #ffeb35; }
     100%{opacity: 1;background-color: #00ff95;transform: scale(1); border-radius: 0px;}
+}
+
+.path{
+    background: #ff9393;
 }
 
 //=====================================================

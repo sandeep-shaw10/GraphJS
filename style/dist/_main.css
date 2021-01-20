@@ -11,7 +11,7 @@ body {
 .board {
   width: 40vw;
   height: 40vw;
-  background-color: #aafff3;
+  background-color: #ffffff;
   border-radius: 25px;
   background: linear-gradient(145deg, #f0f0f0, #cacaca);
   box-shadow: 25px 25px 50px #bebebe, -25px -25px 50px #ffffff;
@@ -19,7 +19,7 @@ body {
 }
 
 .unit {
-  background-color: #aafff3;
+  background-color: #ffffff;
   border-radius: 2px;
   border: 0.1px outset #84abff;
 }
@@ -29,7 +29,7 @@ body {
 }
 
 .restore {
-  background: #aafff3;
+  background: #ffffff;
 }
 
 .target {
@@ -47,7 +47,7 @@ body {
 
 .animate {
   animation: appear 1s;
-  background-color: #efff5f;
+  background-color: #f4fd9e;
 }
 
 @keyframes appear {
@@ -67,6 +67,10 @@ body {
     border-radius: 0px;
   }
 }
+.path {
+  background: #ff9393;
+}
+
 .control {
   width: 40vw;
   height: 40vw;

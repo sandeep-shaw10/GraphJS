@@ -1,5 +1,5 @@
 //Importing Algorithm
-import {x} from './dijkstra.js'
+import {Dijkstra} from './dijkstra.js'
 import {BreadthFirstSearch} from './bfs.js'
 import {DepthFirstSearch} from './dfs.js'
 
@@ -86,8 +86,7 @@ $(document).ready(function () {
     } else if (algo == 2) {
       DepthFirstSearch(data,startid,endid);
     } else if (algo == 3) {
-      console.log("Call dJ");
-      x();
+      Dijkstra(data,startid,endid);
     } else {
       console.log("Call aS");
     }
@@ -118,6 +117,7 @@ $(document).ready(function () {
     $(".unit").removeClass("animate");
     $(".unit").removeClass("target");
     $(".unit").removeClass("wall");
+    $(".unit").removeClass("path");
   });
 
   //Double Click Custom WALL Mouse Event
@@ -208,6 +208,7 @@ $(document).ready(function () {
       this.neighbors = [];
       this.path = [];
       this.visited = false;
+      this.distance = 0;
 
       this.connectFrom = function(data){
           var i = this.i;
