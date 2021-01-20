@@ -10,7 +10,6 @@ export function Dijkstra(arrayData,startNode,endNode){
     Data = arrayData;
     Queue = [];
     visited = [];
-    //console.log(Data[0][0]);
     let f1,f2 = false;
     gotit = false;
 
@@ -30,13 +29,6 @@ export function Dijkstra(arrayData,startNode,endNode){
         }
     }
 
-    //Every element to infinity
-    for (let i = 0; i < Data.length; i++) {
-        for (let j = 0; j < Data.length; j++) {
-            Data[i][j].distance = Infinity;
-        }
-    }
-
     //Starting node to 0
     startNode.distance = 0;
 
@@ -49,7 +41,6 @@ export function Dijkstra(arrayData,startNode,endNode){
 
     while(Queue.length!=0){
         var min = getMinDistance(Queue); //Getting the minimum path
-        //console.log(min.neighbors[0].id);
         if(min == undefined){
             break;
         }
@@ -61,7 +52,6 @@ export function Dijkstra(arrayData,startNode,endNode){
                 if(fun<min.neighbors[i].distance){
                     min.neighbors[i].distance = fun;
                     min.neighbors[i].path = min.id;
-                    //console.log(min.neighbors[i].distance + " : "+min.neighbors[i].path);
                     //Path-Find
                     if(min.neighbors[i].id == endNode.id){
                         gotit = true
@@ -126,9 +116,9 @@ function djanimate(data,start,stop,get){
 
 function pathAnimate(start,stop,frames){
     let nodes = frames;
-    console.log(start);
-    console.log(stop);
-    console.log(frames);
+    //console.log(start);
+    //console.log(stop);
+    //console.log(frames);
     var x = stop;
     var trace = [];
 

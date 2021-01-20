@@ -6,6 +6,8 @@ var _bfs = require("./bfs.js");
 
 var _dfs = require("./dfs.js");
 
+var _astar = require("./astar.js");
+
 //Importing Algorithm
 $(document).ready(function () {
   //Set pevious State
@@ -89,7 +91,7 @@ $(document).ready(function () {
     } else if (algo == 3) {
       (0, _dijkstra.Dijkstra)(data, startid, endid);
     } else {
-      console.log("Call aS");
+      (0, _astar.Astar)(data, startid, endid);
     }
   } //Display---Animation---Onclick
 
@@ -207,7 +209,10 @@ $(document).ready(function () {
     this.neighbors = [];
     this.path = [];
     this.visited = false;
-    this.distance = 0;
+    this.distance = Infinity;
+    this.heuristic = 0;
+    this["function"] = this.distance + this.heuristic;
+    this.source = "";
 
     this.connectFrom = function (data) {
       var i = this.i;

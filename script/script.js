@@ -2,6 +2,7 @@
 import {Dijkstra} from './dijkstra.js'
 import {BreadthFirstSearch} from './bfs.js'
 import {DepthFirstSearch} from './dfs.js'
+import {Astar} from './astar.js'
 
 $(document).ready(function () {
   //Set pevious State
@@ -88,7 +89,7 @@ $(document).ready(function () {
     } else if (algo == 3) {
       Dijkstra(data,startid,endid);
     } else {
-      console.log("Call aS");
+     Astar(data,startid,endid);
     }
   }
 
@@ -208,7 +209,10 @@ $(document).ready(function () {
       this.neighbors = [];
       this.path = [];
       this.visited = false;
-      this.distance = 0;
+      this.distance = Infinity;
+      this.heuristic = 0;
+      this.function = this.distance + this.heuristic;
+      this.source = "";
 
       this.connectFrom = function(data){
           var i = this.i;

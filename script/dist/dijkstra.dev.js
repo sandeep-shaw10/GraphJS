@@ -13,8 +13,7 @@ function Dijkstra(arrayData, startNode, endNode) {
   Data = new Array(2);
   Data = arrayData;
   Queue = [];
-  visited = []; //console.log(Data[0][0]);
-
+  visited = [];
   var f1,
       f2 = false;
   gotit = false;
@@ -35,27 +34,19 @@ function Dijkstra(arrayData, startNode, endNode) {
     if (f1 && f2) {
       break;
     }
-  } //Every element to infinity
-
-
-  for (var _i = 0; _i < Data.length; _i++) {
-    for (var _j = 0; _j < Data.length; _j++) {
-      Data[_i][_j].distance = Infinity;
-    }
   } //Starting node to 0
 
 
   startNode.distance = 0; //Adding element to the queue
 
-  for (var _i2 = 0; _i2 < Data.length; _i2++) {
-    for (var _j2 = 0; _j2 < Data.length; _j2++) {
-      Queue.push(Data[_i2][_j2]);
+  for (var _i = 0; _i < Data.length; _i++) {
+    for (var _j = 0; _j < Data.length; _j++) {
+      Queue.push(Data[_i][_j]);
     }
   }
 
   while (Queue.length != 0) {
     var min = getMinDistance(Queue); //Getting the minimum path
-    //console.log(min.neighbors[0].id);
 
     if (min == undefined) {
       break;
@@ -65,25 +56,24 @@ function Dijkstra(arrayData, startNode, endNode) {
       return item !== min;
     }); //Removing the current from Queue
 
-    for (var _i3 = 0; _i3 < min.neighbors.length; _i3++) {
+    for (var _i2 = 0; _i2 < min.neighbors.length; _i2++) {
       //Looping through the neighbours of min
-      if (Queue.indexOf(min.neighbors[_i3]) >= 0) {
+      if (Queue.indexOf(min.neighbors[_i2]) >= 0) {
         //Checking if it's neighbour is in the queue
         var fun = min.distance + 1; //1 is the weighted
 
-        if (fun < min.neighbors[_i3].distance) {
-          min.neighbors[_i3].distance = fun;
-          min.neighbors[_i3].path = min.id; //console.log(min.neighbors[i].distance + " : "+min.neighbors[i].path);
-          //Path-Find
+        if (fun < min.neighbors[_i2].distance) {
+          min.neighbors[_i2].distance = fun;
+          min.neighbors[_i2].path = min.id; //Path-Find
 
-          if (min.neighbors[_i3].id == endNode.id) {
+          if (min.neighbors[_i2].id == endNode.id) {
             gotit = true;
             break;
           } //====================Animate
 
 
           if (!gotit) {
-            visited.push(min.neighbors[_i3].id);
+            visited.push(min.neighbors[_i2].id);
           } //=========================
 
         }
@@ -142,10 +132,10 @@ function djanimate(data, start, stop, get) {
 }
 
 function pathAnimate(start, stop, frames) {
-  var nodes = frames;
-  console.log(start);
-  console.log(stop);
-  console.log(frames);
+  var nodes = frames; //console.log(start);
+  //console.log(stop);
+  //console.log(frames);
+
   var x = stop;
   var trace = [];
 
@@ -163,14 +153,14 @@ function pathAnimate(start, stop, frames) {
   } //console.log(trace);
 
 
-  var _loop2 = function _loop2(_i4) {
+  var _loop2 = function _loop2(_i3) {
     setTimeout(function () {
-      $("#" + trace[_i4]).addClass("path"); //console.log("Trace = " + trace[i]);
+      $("#" + trace[_i3]).addClass("path"); //console.log("Trace = " + trace[i]);
     }, ++frames * 100);
   };
 
-  for (var _i4 = trace.length - 2; _i4 >= 0; _i4--) {
-    _loop2(_i4);
+  for (var _i3 = trace.length - 2; _i3 >= 0; _i3--) {
+    _loop2(_i3);
   } //console.log("Entered");
 
 
