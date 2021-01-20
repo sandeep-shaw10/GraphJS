@@ -57,18 +57,28 @@ function checkVisitedNode(node){
 
 //function Animate
 function bfsAnimate(data,stop){
+    //console.log(data);
+    //console.log(stop);
+    let notfound = true;
 
-    console.log(data);
-
-    for (let i = 1; i < data.length; i++) {
+    for (var i = 1; i < data.length; i++) {
         let x = data[i].id;
         if(x!=stop){
             setTimeout(function(){
                 $("#"+x).addClass("animate");
-                console.log(x);
+                //console.log(x);
             },(i+1)*100);
         }else{
+            notfound = false;
+            setTimeout(function(){
+                alert("Element Found! \nNode visited after searching "+(i-1)+" nodes.");
+            },(i+3)*100);
             break
         }
+    }
+    if(notfound){
+        setTimeout(function(){
+            alert("Element cannot be found!");
+        },(i+3)*100);
     }
 }

@@ -25,7 +25,7 @@ export function DepthFirstSearch(arrayData,startNode,endNode){
     }
     //console.log(startNode)
     graphTraversal(startNode,endNode);
-    console.log(visited)
+    dfsanimate(visited,endNode);
 }
 //Recursion
 function graphTraversal(node,stop){
@@ -44,5 +44,32 @@ function graphTraversal(node,stop){
             spotted = true;
         }
     }
-     
-  }
+}
+
+//Animate
+function dfsanimate(data,stop){
+    //console.log(data);
+    //console.log(stop);
+    let notfound = true;
+
+    for (var i = 1; i < data.length; i++) {
+        let x = data[i];
+        if(x!=stop){
+            setTimeout(function(){
+                $("#"+x).addClass("animate");
+                //console.log(x);
+            },(i+1)*100);
+        }else{
+            notfound = false;
+            setTimeout(function(){
+                alert("Element Found! \nNode visited after searching "+(i-1)+" nodes.");
+            },(i+3)*100);
+            break
+        }
+    }
+    if(notfound){
+        setTimeout(function(){
+            alert("Element cannot be found!");
+        },(i+3)*100);
+    }
+}

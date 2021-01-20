@@ -42,7 +42,7 @@ body{
 }
 
 .restore{
-    background: #aafff3;
+    background: $theme2;
 }
 
 .target{
@@ -60,14 +60,13 @@ body{
 
 .animate{
     animation: appear 1s;
-    background-color: #fff066 ;
-    opacity: 1;
+    background-color: #efff5f;
 }
 
 @keyframes appear{
-    0%{background-color: #42ffe0 ;opacity: 0;}
-    75%{background-color: #5900ff ;opacity: 0.5;}
-    100%{background-color: #ffff66 ;opacity: 1;}
+    0%{opacity: 0.5;transform: scale(0); border-radius: 50%;}
+    30%{opacity: 0.75;background-color: #ffeb35; }
+    100%{opacity: 1;background-color: #00ff95;transform: scale(1); border-radius: 0px;}
 }
 
 //=====================================================

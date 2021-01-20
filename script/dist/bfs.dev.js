@@ -3,14 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DepthFirstSearch = DepthFirstSearch;
+exports.BreadthFirstSearch = BreadthFirstSearch;
 var Data;
-var visited = [];
-var spotted = false; //Implementing BFS Traversal
+var Queue = [];
+var visited = []; //Implementing BFS Traversal
 
-function DepthFirstSearch(arrayData, startNode, endNode) {
+function BreadthFirstSearch(arrayData, startNode, endNode) {
   Data = new Array(2);
   Data = arrayData;
+  Queue = [];
   visited = []; //console.log(Data[0][0]);
 
   var found = false;
@@ -30,38 +31,43 @@ function DepthFirstSearch(arrayData, startNode, endNode) {
   } //console.log(startNode)
 
 
-  graphTraversal(startNode, endNode);
-  dfsanimate(visited, endNode);
-} //Recursion
+  Queue.push(startNode);
+  visited.push(startNode); //console.log(Queue);
+  //console.log(visited);
 
+  while (Queue.length != 0) {
+    var x = Queue.shift(); //console.log(x);
 
-function graphTraversal(node, stop) {
-  //console.log(node);
-  if (spotted) {//pass
-  } else {
-    node.visited = true;
-    visited.push(node.id);
-
-    for (var i = 0; i < node.neighbors.length; i++) {
-      if (!node.neighbors[i].visited) {
-        graphTraversal(node.neighbors[i]);
+    for (var _i = 0; _i < x.neighbors.length; _i++) {
+      if (checkVisitedNode(x.neighbors[_i])) {
+        Queue.push(x.neighbors[_i]);
+        visited.push(x.neighbors[_i]);
       }
     }
+  }
 
-    if (node == stop) {
-      spotted = true;
+  bfsAnimate(visited, endNode);
+} //Check Visited Node
+
+
+function checkVisitedNode(node) {
+  for (var i = 0; i < visited.length; i++) {
+    if (node == visited[i]) {
+      return false;
     }
   }
-} //Animate
+
+  return true;
+} //function Animate
 
 
-function dfsanimate(data, stop) {
+function bfsAnimate(data, stop) {
   //console.log(data);
   //console.log(stop);
   var notfound = true;
 
   var _loop = function _loop() {
-    var x = data[i];
+    var x = data[i].id;
 
     if (x != stop) {
       setTimeout(function () {
