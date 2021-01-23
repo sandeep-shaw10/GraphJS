@@ -8,7 +8,7 @@ var Data;
 var Queue = [];
 var visited = []; //Implementing BFS Traversal
 
-function BreadthFirstSearch(arrayData, startNode, endNode) {
+function BreadthFirstSearch(arrayData, startNode, endNode, SPEED) {
   Data = new Array(2);
   Data = arrayData;
   Queue = [];
@@ -46,7 +46,7 @@ function BreadthFirstSearch(arrayData, startNode, endNode) {
     }
   }
 
-  bfsAnimate(visited, endNode);
+  bfsAnimate(visited, endNode, SPEED);
 } //Check Visited Node
 
 
@@ -61,7 +61,7 @@ function checkVisitedNode(node) {
 } //function Animate
 
 
-function bfsAnimate(data, stop) {
+function bfsAnimate(data, stop, speed) {
   //console.log(data);
   //console.log(stop);
   var notfound = true;
@@ -72,12 +72,17 @@ function bfsAnimate(data, stop) {
     if (x != stop) {
       setTimeout(function () {
         $("#" + x).addClass("animate"); //console.log(x);
-      }, (i + 1) * 100);
+      }, (i + 1) * 20 * speed);
     } else {
       notfound = false;
       setTimeout(function () {
         alert("Element Found! \nNode visited after searching " + (i - 1) + " nodes.");
-      }, (i + 3) * 100);
+        $("#wall").removeAttr('disabled');
+        $("#clear").removeAttr('disabled');
+        $("#size").removeAttr('disabled');
+        $("#speed").removeAttr('disabled');
+        $("#start").removeAttr('disabled');
+      }, (i + 3) * 20 * speed);
       return "break";
     }
   };
@@ -91,6 +96,11 @@ function bfsAnimate(data, stop) {
   if (notfound) {
     setTimeout(function () {
       alert("Element cannot be found!");
-    }, (i + 3) * 100);
+      $("#wall").removeAttr('disabled');
+      $("#clear").removeAttr('disabled');
+      $("#size").removeAttr('disabled');
+      $("#speed").removeAttr('disabled');
+      $("#start").removeAttr('disabled');
+    }, (i + 3) * 20 * speed);
   }
 }

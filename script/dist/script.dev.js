@@ -23,8 +23,7 @@ $(document).ready(function () {
   displayGrid(SIZE); //sIZE SPEED AND SIZE
 
   $("[type=range]").change(function () {
-    var newval = $(this).val();
-    console.log(newval);
+    var newval = $(this).val(); //console.log(newval);
 
     if (this.id == "speed") {
       $("#speed_dis").text(newval);
@@ -55,10 +54,11 @@ $(document).ready(function () {
     displayGrid(SIZE);
     startid = undefined;
     endid = undefined;
-  }); //cHOOSE aLGORITHM
+  }); //cHOOSE aLGORITHm
 
-  $("#algo-select").on("click", function () {
-    var choice = $(".form-select").val();
+  $('select').on('change', function () {
+    //console.log( this.value );
+    var choice = this.value;
 
     if (choice == 1) {
       $(".title h1").text("Breadth First Search");
@@ -78,20 +78,28 @@ $(document).ready(function () {
       alert("Select the starting and ending point.");
     } else {
       wallGenerate();
-      connectArray(SIZE);
+      connectArray(SIZE); //Disable input field
+
+      $("#wall").prop("disabled", true);
+      $("#clear").prop("disabled", true);
+      $("#size").prop("disabled", true);
+      $("#speed").prop("disabled", true);
+      $("#start").prop("disabled", true);
       decoder(ALGORITHM);
     }
   }); //Handle algorithm visualization
 
   function decoder(algo) {
+    SPEED = 6 - SPEED;
+
     if (algo == 1) {
-      (0, _bfs.BreadthFirstSearch)(data, startid, endid);
+      (0, _bfs.BreadthFirstSearch)(data, startid, endid, SPEED);
     } else if (algo == 2) {
-      (0, _dfs.DepthFirstSearch)(data, startid, endid);
+      (0, _dfs.DepthFirstSearch)(data, startid, endid, SPEED);
     } else if (algo == 3) {
-      (0, _dijkstra.Dijkstra)(data, startid, endid);
+      (0, _dijkstra.Dijkstra)(data, startid, endid, SPEED);
     } else {
-      (0, _astar.Astar)(data, startid, endid);
+      (0, _astar.Astar)(data, startid, endid, SPEED);
     }
   } //Display---Animation---Onclick
 
@@ -152,9 +160,8 @@ $(document).ready(function () {
           $("#" + i).addClass("wall");
         }
       }
-    }
+    } //console.log(wall);
 
-    console.log(wall);
   }); //generating wall array on click
 
   function wallGenerate() {
@@ -166,9 +173,8 @@ $(document).ready(function () {
       if (x == "rgb(1, 110, 253)") {
         wall.push(i);
       }
-    }
+    } //console.log(wall);
 
-    console.log(wall);
   } //Generate Array of Given Size//Conerting Array to Graph
 
 
@@ -195,9 +201,8 @@ $(document).ready(function () {
       for (var _j = 0; _j < size; _j++) {
         data[_i2][_j].connectFrom(data);
       }
-    }
+    } //console.log(data);
 
-    console.log(data);
   } //Function to make neighbors
 
 

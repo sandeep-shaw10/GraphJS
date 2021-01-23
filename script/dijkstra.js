@@ -4,7 +4,7 @@ var visited = [];
 var gotit;
 
 //Implementing Dijkstra Visualization
-export function Dijkstra(arrayData,startNode,endNode){
+export function Dijkstra(arrayData,startNode,endNode,SPEED){
 
     Data = new Array(2);
     Data = arrayData;
@@ -72,7 +72,7 @@ export function Dijkstra(arrayData,startNode,endNode){
     //console.log(Queue);
     //console.log(visited);
 
-    djanimate(visited,startNode,endNode,gotit);
+    djanimate(visited,startNode,endNode,gotit,SPEED);
 
 }
 
@@ -90,7 +90,7 @@ function getMinDistance(queue){
 }
 
 //Animate
-function djanimate(data,start,stop,get){
+function djanimate(data,start,stop,get,speed){
     //console.log(data);
     //console.log(stop);
     //console.log(stop);
@@ -101,20 +101,25 @@ function djanimate(data,start,stop,get){
             setTimeout(function(){
                 $("#"+x).addClass("animate");
                 //console.log(x);
-            },(i+1)*100);
+            },(i+1)*20*speed);
     }
     if(!get){
         setTimeout(function(){
             alert("Element cannot be found!");
-        },(i+3)*100);
+            $("#wall").removeAttr('disabled');
+            $("#clear").removeAttr('disabled');
+            $("#size").removeAttr('disabled');
+            $("#speed").removeAttr('disabled');
+            $("#start").removeAttr('disabled');
+        },(i+3)*20*speed);
     }
 
     if(gotit){
-        pathAnimate(start,stop,i)
+        pathAnimate(start,stop,i,speed)
     }
 }
 
-function pathAnimate(start,stop,frames){
+function pathAnimate(start,stop,frames,speed){
     let nodes = frames;
     //console.log(start);
     //console.log(stop);
@@ -139,13 +144,18 @@ function pathAnimate(start,stop,frames){
         setTimeout(function () {
           $("#" + trace[i]).addClass("path");
           //console.log("Trace = " + trace[i]);
-        }, ++frames * 100);
+        }, ++frames * 20*speed);
     }
 
     //console.log("Entered");
     setTimeout(function(){
         alert("Element Found! \nPath Distance : "+ (trace.length - 1) +"\nNode visited after searching "+(nodes)+" nodes.");
-    },(++frames+2)*100);
+        $("#wall").removeAttr('disabled');
+        $("#clear").removeAttr('disabled');
+        $("#size").removeAttr('disabled');
+        $("#speed").removeAttr('disabled');
+        $("#start").removeAttr('disabled');
+    },(++frames+2)*20*speed);
 
 
 }

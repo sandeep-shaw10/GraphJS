@@ -17,3 +17,9 @@
         box-shadow: none;
     }
 }
+
+@media screen and (max-width: 400px) {
+    .card-grp{
+        display: none;
+    }
+}

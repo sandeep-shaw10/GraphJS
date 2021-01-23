@@ -3,7 +3,7 @@ var visited = [];
 var spotted = false
 
 //Implementing BFS Traversal
-export function DepthFirstSearch(arrayData,startNode,endNode){
+export function DepthFirstSearch(arrayData,startNode,endNode,SPEED){
 
     Data = new Array(2);
     Data = arrayData;
@@ -25,7 +25,7 @@ export function DepthFirstSearch(arrayData,startNode,endNode){
     }
     //console.log(startNode)
     graphTraversal(startNode,endNode);
-    dfsanimate(visited,endNode);
+    dfsanimate(visited,endNode,SPEED);
 }
 //Recursion
 function graphTraversal(node,stop){
@@ -47,7 +47,7 @@ function graphTraversal(node,stop){
 }
 
 //Animate
-function dfsanimate(data,stop){
+function dfsanimate(data,stop,speed){
     //console.log(data);
     //console.log(stop);
     let notfound = true;
@@ -58,18 +58,28 @@ function dfsanimate(data,stop){
             setTimeout(function(){
                 $("#"+x).addClass("animate");
                 //console.log(x);
-            },(i+1)*100);
+            },(i+1)*20*speed);
         }else{
             notfound = false;
             setTimeout(function(){
                 alert("Element Found! \nNode visited after searching "+(i-1)+" nodes.");
-            },(i+3)*100);
+                $("#wall").removeAttr('disabled');
+                $("#clear").removeAttr('disabled');
+                $("#size").removeAttr('disabled');
+                $("#speed").removeAttr('disabled');
+                $("#start").removeAttr('disabled');
+            },(i+3)*20*speed);
             break
         }
     }
     if(notfound){
         setTimeout(function(){
             alert("Element cannot be found!");
-        },(i+3)*100);
+            $("#wall").removeAttr('disabled');
+            $("#clear").removeAttr('disabled');
+            $("#size").removeAttr('disabled');
+            $("#speed").removeAttr('disabled');
+            $("#start").removeAttr('disabled');
+        },(i+3)*20*speed);
     }
 }

@@ -9,7 +9,7 @@ var Queue = [];
 var visited = [];
 var gotit; //Implementing Dijkstra Visualization
 
-function Dijkstra(arrayData, startNode, endNode) {
+function Dijkstra(arrayData, startNode, endNode, SPEED) {
   Data = new Array(2);
   Data = arrayData;
   Queue = [];
@@ -85,7 +85,7 @@ function Dijkstra(arrayData, startNode, endNode) {
   //console.log(visited);
 
 
-  djanimate(visited, startNode, endNode, gotit);
+  djanimate(visited, startNode, endNode, gotit, SPEED);
 }
 
 function getMinDistance(queue) {
@@ -104,13 +104,13 @@ function getMinDistance(queue) {
 } //Animate
 
 
-function djanimate(data, start, stop, get) {
+function djanimate(data, start, stop, get, speed) {
   var _loop = function _loop() {
     var x = data[i]; //console.log(x+"==="+stop);
 
     setTimeout(function () {
       $("#" + x).addClass("animate"); //console.log(x);
-    }, (i + 1) * 100);
+    }, (i + 1) * 20 * speed);
   };
 
   //console.log(data);
@@ -123,15 +123,20 @@ function djanimate(data, start, stop, get) {
   if (!get) {
     setTimeout(function () {
       alert("Element cannot be found!");
-    }, (i + 3) * 100);
+      $("#wall").removeAttr('disabled');
+      $("#clear").removeAttr('disabled');
+      $("#size").removeAttr('disabled');
+      $("#speed").removeAttr('disabled');
+      $("#start").removeAttr('disabled');
+    }, (i + 3) * 20 * speed);
   }
 
   if (gotit) {
-    pathAnimate(start, stop, i);
+    pathAnimate(start, stop, i, speed);
   }
 }
 
-function pathAnimate(start, stop, frames) {
+function pathAnimate(start, stop, frames, speed) {
   var nodes = frames; //console.log(start);
   //console.log(stop);
   //console.log(frames);
@@ -156,7 +161,7 @@ function pathAnimate(start, stop, frames) {
   var _loop2 = function _loop2(_i3) {
     setTimeout(function () {
       $("#" + trace[_i3]).addClass("path"); //console.log("Trace = " + trace[i]);
-    }, ++frames * 100);
+    }, ++frames * 20 * speed);
   };
 
   for (var _i3 = trace.length - 2; _i3 >= 0; _i3--) {
@@ -166,5 +171,10 @@ function pathAnimate(start, stop, frames) {
 
   setTimeout(function () {
     alert("Element Found! \nPath Distance : " + (trace.length - 1) + "\nNode visited after searching " + nodes + " nodes.");
-  }, (++frames + 2) * 100);
+    $("#wall").removeAttr('disabled');
+    $("#clear").removeAttr('disabled');
+    $("#size").removeAttr('disabled');
+    $("#speed").removeAttr('disabled');
+    $("#start").removeAttr('disabled');
+  }, (++frames + 2) * 20 * speed);
 }

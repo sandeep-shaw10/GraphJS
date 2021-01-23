@@ -21,7 +21,7 @@ $(document).ready(function () {
   //sIZE SPEED AND SIZE
   $("[type=range]").change(function () {
     var newval = $(this).val();
-    console.log(newval);
+    //console.log(newval);
     if (this.id == "speed") {
       $("#speed_dis").text(newval);
       SPEED = newval;
@@ -54,19 +54,20 @@ $(document).ready(function () {
     endid = undefined;
   });
 
-  //cHOOSE aLGORITHM
-  $("#algo-select").on("click", function () {
-    let choice = $(".form-select").val();
-    if (choice == 1) {
-      $(".title h1").text("Breadth First Search");
-    } else if (choice == 2) {
-      $(".title h1").text("Depth First Search");
-    } else if (choice == 3) {
-      $(".title h1").text("Dijkstra Algorithm");
-    } else {
-      $(".title h1").text("A* Algorithm");
-    }
-    ALGORITHM = choice;
+  //cHOOSE aLGORITHm
+  $('select').on('change', function() {
+      //console.log( this.value );
+      let choice = this.value;
+      if (choice == 1) {
+        $(".title h1").text("Breadth First Search");
+      } else if (choice == 2) {
+        $(".title h1").text("Depth First Search");
+      } else if (choice == 3) {
+        $(".title h1").text("Dijkstra Algorithm");
+      } else {
+        $(".title h1").text("A* Algorithm");
+      }
+      ALGORITHM = choice;
   });
 
   //oNCLICK HAndle Visualization [[[[[[Start]]]]]]]
@@ -76,20 +77,27 @@ $(document).ready(function () {
     } else {
       wallGenerate();
       connectArray(SIZE);
+      //Disable input field
+      $("#wall").prop("disabled", true);
+      $("#clear").prop("disabled", true);
+      $("#size").prop("disabled", true);
+      $("#speed").prop("disabled", true);
+      $("#start").prop("disabled", true);
       decoder(ALGORITHM);
     }
   });
 
   //Handle algorithm visualization
   function decoder(algo) {
+    SPEED = 6 - SPEED;
     if (algo == 1) {
-      BreadthFirstSearch(data,startid,endid);
+      BreadthFirstSearch(data,startid,endid,SPEED);
     } else if (algo == 2) {
-      DepthFirstSearch(data,startid,endid);
+      DepthFirstSearch(data,startid,endid,SPEED);
     } else if (algo == 3) {
-      Dijkstra(data,startid,endid);
+      Dijkstra(data,startid,endid,SPEED);
     } else {
-     Astar(data,startid,endid);
+     Astar(data,startid,endid,SPEED);
     }
   }
 
@@ -156,7 +164,7 @@ $(document).ready(function () {
         }
       }
     }
-    console.log(wall);
+    //console.log(wall);
   });
 
   //generating wall array on click
@@ -168,7 +176,7 @@ $(document).ready(function () {
         wall.push(i);
       }
     }
-    console.log(wall);
+    //console.log(wall);
   }
 
   //Generate Array of Given Size//Conerting Array to Graph
@@ -197,7 +205,7 @@ $(document).ready(function () {
         data[i][j].connectFrom(data);
       }
     }
-    console.log(data);
+    //console.log(data);
   }
 
     //Function to make neighbors

@@ -8,7 +8,7 @@ var Data;
 var visited = [];
 var spotted = false; //Implementing BFS Traversal
 
-function DepthFirstSearch(arrayData, startNode, endNode) {
+function DepthFirstSearch(arrayData, startNode, endNode, SPEED) {
   Data = new Array(2);
   Data = arrayData;
   visited = []; //console.log(Data[0][0]);
@@ -31,7 +31,7 @@ function DepthFirstSearch(arrayData, startNode, endNode) {
 
 
   graphTraversal(startNode, endNode);
-  dfsanimate(visited, endNode);
+  dfsanimate(visited, endNode, SPEED);
 } //Recursion
 
 
@@ -55,7 +55,7 @@ function graphTraversal(node, stop) {
 } //Animate
 
 
-function dfsanimate(data, stop) {
+function dfsanimate(data, stop, speed) {
   //console.log(data);
   //console.log(stop);
   var notfound = true;
@@ -66,12 +66,17 @@ function dfsanimate(data, stop) {
     if (x != stop) {
       setTimeout(function () {
         $("#" + x).addClass("animate"); //console.log(x);
-      }, (i + 1) * 100);
+      }, (i + 1) * 20 * speed);
     } else {
       notfound = false;
       setTimeout(function () {
         alert("Element Found! \nNode visited after searching " + (i - 1) + " nodes.");
-      }, (i + 3) * 100);
+        $("#wall").removeAttr('disabled');
+        $("#clear").removeAttr('disabled');
+        $("#size").removeAttr('disabled');
+        $("#speed").removeAttr('disabled');
+        $("#start").removeAttr('disabled');
+      }, (i + 3) * 20 * speed);
       return "break";
     }
   };
@@ -85,6 +90,11 @@ function dfsanimate(data, stop) {
   if (notfound) {
     setTimeout(function () {
       alert("Element cannot be found!");
-    }, (i + 3) * 100);
+      $("#wall").removeAttr('disabled');
+      $("#clear").removeAttr('disabled');
+      $("#size").removeAttr('disabled');
+      $("#speed").removeAttr('disabled');
+      $("#start").removeAttr('disabled');
+    }, (i + 3) * 20 * speed);
   }
 }

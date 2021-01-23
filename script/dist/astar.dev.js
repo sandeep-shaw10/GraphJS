@@ -10,7 +10,7 @@ var visited = [];
 var found = false;
 var totalPath = []; //Implementing Dijkstra Visualization
 
-function Astar(arrayData, startNode, endNode) {
+function Astar(arrayData, startNode, endNode, SPEED) {
   //Initialization
   Data = new Array(2);
   Data = arrayData;
@@ -54,7 +54,7 @@ function Astar(arrayData, startNode, endNode) {
     if (x != endNode.id) {
       setTimeout(function () {
         $("#" + x).addClass("animate");
-      }, (i + 1) * 100);
+      }, (i + 1) * 20 * SPEED);
     }
   };
 
@@ -65,9 +65,14 @@ function Astar(arrayData, startNode, endNode) {
   if (!found) {
     setTimeout(function () {
       alert("Not Found");
-    }, (i + 2) * 100);
+      $("#wall").removeAttr('disabled');
+      $("#clear").removeAttr('disabled');
+      $("#size").removeAttr('disabled');
+      $("#speed").removeAttr('disabled');
+      $("#start").removeAttr('disabled');
+    }, (i + 2) * 20 * SPEED);
   } else {
-    AstarPath(totalPath, i, visited.length);
+    AstarPath(totalPath, i, visited.length, SPEED);
   }
 } //Trace Path
 
@@ -151,13 +156,13 @@ function Astarcode(Data, startNode, endNode, totalPath, visited) {
   return false;
 }
 
-function AstarPath(path, frames, nodes) {
+function AstarPath(path, frames, nodes, speed) {
   var _loop2 = function _loop2() {
     var x = path[i]; //console.log(x+"==="+stop);
 
     setTimeout(function () {
       $("#" + x).addClass("path");
-    }, ++frames * 100);
+    }, ++frames * 20 * speed);
   };
 
   for (var i = path.length - 1; i >= 0; i--) {
@@ -166,5 +171,10 @@ function AstarPath(path, frames, nodes) {
 
   setTimeout(function () {
     alert("Path Found\nDistance : " + path.length + "\nNode visited after searching " + nodes + " nodes.");
-  }, (++frames + 2) * 100);
+    $("#wall").removeAttr('disabled');
+    $("#clear").removeAttr('disabled');
+    $("#size").removeAttr('disabled');
+    $("#speed").removeAttr('disabled');
+    $("#start").removeAttr('disabled');
+  }, (++frames + 2) * 20 * speed);
 }

@@ -55,7 +55,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="control my-4 mx-auto p-4">
-                        <h1 class="text-center my-2"> <i class="fa fa-cog fa-spin"></i> Controls</h1>
+                        <h1 class="text-center mb-5"> <i class="fa fa-cog fa-spin"></i> Controls</h1>
                         <!--Choose Algorithm-->
                         <div class="col-auto my-2">
                             <div class="container">
@@ -69,7 +69,7 @@
                                         </select>
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-dark m-2" id="algo-select">Apply</button>
+                                        <button class="btn btn-dark" id="start">Visualize</button>
                                     </div>
                                 </div>
                             </div>
@@ -87,14 +87,11 @@
 
 
                         <div class="container">
-                            <div class="row text-center">
-                                <div class="col-4">
-                                    <button class="btn btn-dark" id="start">Visualize</button>
-                                </div>
-                                <div class="col-4">
+                            <div class="row">
+                                <div class="col-6  text-center">
                                     <button class="btn btn-outline-dark" id="clear">Clear</button>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-6  text-center">
                                     <button class="btn btn-dark" id="wall">Wall</button>
                                 </div>
                             </div>
@@ -170,7 +167,9 @@
                     <div class="icon-show my-4">
                         <img class="img-fluid " src="https://www.svgrepo.com/show/27891/location.svg" alt="icon"
                             width="250px">
-                        <h4 class="my-2">Map Marker</h4>
+                        <h4 class="my-2">Shortest Path Visualizer</h4>
+                        <span class="badge rounded-pill bg-dark">Dijkstra Algorithm</span>
+                        <span class="badge rounded-pill bg-dark">A* Algorithm</span>
                     </div>
                 </div>
 
@@ -178,14 +177,18 @@
                     <div class="icon-show my-4">
                         <img class="img-fluid" src="https://www.svgrepo.com/show/1089/graph.svg" alt="icon"
                             width="250px">
-                        <h4 class="my-2">Map Marker</h4>
+                        <h4 class="my-2">Searching Visualizer</h4>
+                        <span class="badge rounded-pill bg-danger">Breadth First Search</span>
+                        <span class="badge rounded-pill bg-danger">Depth First Search</span>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <div class="icon-show my-4">
                         <img class="img-fluid" src="https://www.svgrepo.com/show/227055/maze.svg" alt="icon"
                             width="250px">
-                        <h4 class="my-2">Map Marker</h4>
+                        <h4 class="my-2">Maze Visualization</h4>
+                        <span class="badge rounded-pill bg-success">Uniform Weighted Path</span>
+                        <span class="badge rounded-pill bg-success">4 Neighbours</span>
                     </div>
                 </div>
             </div>
