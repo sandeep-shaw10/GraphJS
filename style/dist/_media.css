@@ -16,8 +16,17 @@
     box-shadow: none;
   }
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 340px) {
   .card-grp {
     display: none;
+  }
+}
+@media screen and (max-width: 400px) {
+  .card-grp {
+    margin-top: 30px;
+  }
+
+  .icon {
+    margin-top: 100px;
   }
 }
