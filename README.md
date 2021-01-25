@@ -55,11 +55,11 @@
 
 ### Depth First Search and Breadth First Search
 
-![Preview](https://visme.co/blog/wp-content/uploads/2020/02/header-1200.gif)
+![Preview](visual1.gif)
 
 ### Dijikstra Algorithm and A\* Algorithm
 
-![Preview](https://visme.co/blog/wp-content/uploads/2020/02/header-1200.gif)
+![Preview](visual2.gif)
 
 > Sandeep Shaw
 > Student, C.S.E
