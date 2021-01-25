@@ -8,7 +8,7 @@
 
 ## WEBSITE PREVIEW
 
-![Preview](https://visme.co/blog/wp-content/uploads/2020/02/header-1200.gif)
+![Preview](preview.gif)
 
 ### SEARCHING VISUALIZER
 
